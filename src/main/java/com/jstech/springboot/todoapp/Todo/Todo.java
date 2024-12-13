@@ -1,16 +1,23 @@
-package com.jstech.springboot.todoapp.ToDo;
+package com.jstech.springboot.todoapp.Todo;
+
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
-public class ToDo {
+//Database (MySQL)
+//Static List of todos => Database (H2, MySQL)
+
+public class Todo {
 
     private int id;
     private String username;
+    @Size(min = 10, message = "enter at least 10 characters")
     private String description;
     private LocalDate targetDate;
     private boolean done;
 
-    public ToDo(int id, String username, String description, LocalDate targetDate, boolean done) {
+    public Todo(int id, String username, String description, LocalDate targetDate, boolean done) {
+        super();
         this.id = id;
         this.username = username;
         this.description = description;
@@ -60,12 +67,8 @@ public class ToDo {
 
     @Override
     public String toString() {
-        return "ToDo{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", description='" + description + '\'' +
-                ", targetDate=" + targetDate +
-                ", done=" + done +
-                '}';
+        return "Todo [id=" + id + ", username=" + username + ", description=" + description + ", targetDate="
+                + targetDate + ", done=" + done + "]";
     }
+
 }
