@@ -18,13 +18,10 @@ import java.util.List;
 @SessionAttributes("name")
 public class TodoControllerJpa {
 
-    private final TodoService todoService;
-
     private final TodoRepository todoRepository;
 
-    public TodoControllerJpa(TodoService todoService, TodoRepository todoRepository) {
+    public TodoControllerJpa(TodoRepository todoRepository) {
         super();
-        this.todoService = todoService;
         this.todoRepository = todoRepository;
     }
 
@@ -58,15 +55,15 @@ public class TodoControllerJpa {
             return "todo";
         }
         String username = getLoggedinUsername(model);
-        todoService.addTodo(username, todo.getDescription(),
-                todo.getTargetDate(), false);
+        todo.setUsername(username);
+        todoRepository.save(todo);
         return "redirect:list-todos";
     }
 
     @RequestMapping("delete-todo")
     public String deleteTodo(@RequestParam int id) {
         // delete a given Todo bean that matches Function Argument = ID
-        todoService.deleteById(id);
+        todoRepository.deleteById(id);
         return "redirect:list-todos";
     }
 
@@ -74,7 +71,7 @@ public class TodoControllerJpa {
     public String showUpdateTodoPage(@RequestParam int id, ModelMap model) {
         // Update a given Todo bean that matches Function Argument = ID
         String username = getLoggedinUsername(model);
-        Todo foundTodo = todoService.findById(id);
+        Todo foundTodo = todoRepository.findById(id).get();
         model.put("todo", foundTodo);
 
         return "todo";
@@ -87,7 +84,7 @@ public class TodoControllerJpa {
         }
         String username = getLoggedinUsername(model);
         todo.setUsername(username);
-        todoService.updateTodo(todo);
+        todoRepository.save(todo);
         return "redirect:list-todos";
     }
 }
