@@ -1,21 +1,33 @@
 package com.jstech.springboot.todoapp.Todo;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
-//Database (MySQL)
+//Database (MySQL eventually, currently using H2)
 //Static List of todos => Database (H2, MySQL)
 
+// JPA -> declare a class/bean with annotation @Entity for JPA to consider a bean to be a table in DB
+
+@Entity
 public class Todo {
 
+    @Id
+    @GeneratedValue
     private int id;
+
     private String username;
     @Size(min = 10, message = "enter at least 10 characters")
     private String description;
     private LocalDate targetDate;
     private boolean done;
 
+    public Todo() {
+    }
+    
     public Todo(int id, String username, String description, LocalDate targetDate, boolean done) {
         super();
         this.id = id;

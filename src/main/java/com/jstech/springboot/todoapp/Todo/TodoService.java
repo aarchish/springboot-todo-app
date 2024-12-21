@@ -16,21 +16,21 @@ public class TodoService {
         todos.add(new Todo(
                 ++todoCount,
                 "aarchish",
-                "Learn Spring Boot",
+                "Learn Spring Boot via Static List",
                 LocalDate.now().plusMonths(1),
                 false
         ));
         todos.add(new Todo(
                 ++todoCount,
                 "aarchish",
-                "Learn Full Stack Development",
+                "Learn Full Stack Development via Static List",
                 LocalDate.now().plusMonths(1),
                 false
         ));
         todos.add(new Todo(
                 ++todoCount,
                 "aarchish",
-                "Learn React.JS",
+                "Learn React.JS via Static List",
                 LocalDate.now().plusMonths(1),
                 false
         ));
